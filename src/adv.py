@@ -52,31 +52,55 @@ input("Press any key to begin: ")
 while direction != "q":
     # If player has not moved
     if cur_room == player.location:
-        #Current room stays stable
+        # Current room stays stable
         cur_room = cur_room
     else:
-        #current room updates to players new location
+        # Current room updates to players new location
         cur_room = player.location
 
-#print player name & location
-
+    # Print player name & location
     print(f"{player.name} is in {player.location.name}")
-
 
 
 # * Prints the current room name
     print(f"{player.location.name}")
 # * Prints the current description (the textwrap module might be useful here).
-    print(place[1])
+    print(f"{player.location.description}")
 
 # * Waits for user input and decides what to do.
-    direction = input("Please input direction: ")
+    direction = input("Please input direction (n, s, e, w): ")
 
 # If the user enters a cardinal direction, attempt to move to the room there.
-    if direction.lower() not in :
+    if direction.lower() in ["n", "s", "e", "w", "q"]:
+        if direction == "n":
+            # Update current room to northern room
+            cur_room = cur_room.n_to
+        elif direction == "s":
+            # Update current room to southern room
+            cur_room = cur_room.s_to
+        elif direction == "e":
+            # Update current room to eastern room
+            cur_room = cur_room.e_to
+        elif direction == "w":
+            # Update current room to western room
+            cur_room == cur_room.w_to
+        elif direction == "q":
+            quit()
+
+        # If current room has None, print a message
+        if cur_room is None:
+            print(f"There is nowhere for {player.name} to go.")
+        elif cur_room == player.location:
+            # If current room has not updated, print a message
+            print("Think about your next move...")
+        else:
+            # If current room available to update, update room and move on
+            print(f"{player.name} moves with vigor to {cur_room.name}")
+            player.location = cur_room
 
 # Print an error message if the movement isn't allowed.
     else:
-        print("movement not allowed")
+        print("Direction Not Valid")
+
 #
 # If the user enters "q", quit the game.
