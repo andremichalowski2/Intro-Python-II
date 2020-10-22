@@ -7,6 +7,7 @@ class Room:
         self.name = name
         self.description = description
         self.item = item
+        # item will be a list and there will be a function to add items to list
         self.l_count = l_count
         self.n_to = None
         self.e_to = None

@@ -6,4 +6,8 @@ class Player:
     def __init__(self, name, location, inventory):
         self.name = name
         self.location = location
-        self.inventory = inventory
+        self.inventory = []
+        # Inventory is also a list
+
+    def add(self, item):
+        self.inventory.append(item)

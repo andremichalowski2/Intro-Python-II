@@ -67,11 +67,15 @@ while direction != "q":
 # * Prints the current description (the textwrap module might be useful here).
     print(f"{player.location.description}")
 
+# Print items in the room
+    if player.location.item:
+        print(f"{player.location.item}")
+
 # * Waits for user input and decides what to do.
-    direction = input("Please input direction (n, s, e, w): ")
+    direction = input("What do you do? (n, s, e, w, (a)ction: ")
 
 # If the user enters a cardinal direction, attempt to move to the room there.
-    if direction.lower() in ["n", "s", "e", "w", "q"]:
+    if direction.lower() in ["n", "s", "e", "w", "q", "a"]:
         if direction == "n":
             # Update current room to northern room
             cur_room = cur_room.n_to
@@ -84,6 +88,21 @@ while direction != "q":
         elif direction == "w":
             # Update current room to western room
             cur_room = cur_room.w_to
+        elif direction == "a":
+            action = input("What would you like to do? (s)earch (i)nventory (b)ack")
+            if action.lower() == "s" and player.location.item:
+                item = cur_room.item
+                print(f"{player.name} sees {item.name}")
+                decide = input(f"Do you want {item.name}? (y)/(n)? ")
+                if decide.lower() == "y":
+                    player.inventory.append(item.name)
+                elif decide.lower() == "n":
+                    print("You don't want that.")
+            elif action == "s" and player.location.item in player.inventory:
+                print("There is nothing to see here")
+
+            if action.lower() == "i":
+                print(f"{player.inventory}")
         elif direction == "q":
             quit()
 
