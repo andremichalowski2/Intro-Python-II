@@ -83,7 +83,7 @@ while direction != "q":
             cur_room = cur_room.e_to
         elif direction == "w":
             # Update current room to western room
-            cur_room == cur_room.w_to
+            cur_room = cur_room.w_to
         elif direction == "q":
             quit()
 
